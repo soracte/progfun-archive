@@ -1,0 +1,12 @@
+funsets/*
+objsets/*
+target/*
+patmat/.classpath
+patmat/.project
+patmat/.settings/*
+patmat/target/*
+patmat/lib/*
+patmat/project/*
+*.swp
+patmat/src/main/scala/common/*
+build.sbt
