@@ -177,7 +177,10 @@ object Huffman {
 		 * The parameter `chars` is an arbitrary text. This function extracts the character
 		 * frequencies from that text and creates a code tree based on them.
 		 */
-		def createCodeTree(chars: List[Char]): CodeTree = ???
+		def createCodeTree(chars: List[Char]): CodeTree = {
+
+		}
+
 
 
 
@@ -192,16 +195,18 @@ object Huffman {
 		def decode(tree: CodeTree, bits: List[Bit]): List[Char] = decodeIter(tree, tree, bits, List()) 
 
 		def decodeIter(tree: CodeTree, currentTree: CodeTree, bits: List[Bit], acc: List[Char]): List[Char] = {
-			if (bits.isEmpty) acc
-			else {
-				tree match {
-					case Fork => {
-						val nextTree = if bits.head == 0 tree.left else tree.right
-						decodeIter(tree, nextTree, bits.tail, acc)
+			currentTree match {
+				case Fork(left, right, _, _) => {
+					val nextTree = if (bits.head == 0) left else right
+					decodeIter(tree, nextTree, bits.tail, acc)
+				}
+				case Leaf(character, _) => { 
+					val newAcc = acc ::: List(character)
+					if (bits.isEmpty) newAcc 
+					else {
+						decodeIter(tree, tree, bits, newAcc) 
 					}
-					case Leaf => { 
-						decodeIter(tree, tree, bits, acc :: currentTree.char) 
-					}
+
 				}
 			}
 		}
