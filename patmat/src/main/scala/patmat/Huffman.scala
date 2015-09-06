@@ -167,10 +167,6 @@ object Huffman {
 			else until(isSingleton, combine)(combine(list)) 
 		}
 
-
-
-
-
 		/**
 		 * This function creates a code tree which is optimal to encode the text `chars`.
 		 *
@@ -178,11 +174,8 @@ object Huffman {
 		 * frequencies from that text and creates a code tree based on them.
 		 */
 		def createCodeTree(chars: List[Char]): CodeTree = {
-
+			until(singleton, combine)(makeOrderedLeafList(times(chars))).head
 		}
-
-
-
 
 		// Part 3: Decoding
 
